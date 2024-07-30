@@ -1,0 +1,123 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 {
+    color: #444;
+    font-size: 3rem;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+}
+
+h1 i {
+    margin-left: 10px;
+    color: #ffa500;
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.noteskeep {
+    margin-bottom: 20px;
+}
+
+.noteskeep button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    color: white;
+    background-color: #ffa500;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.noteskeep button:hover {
+    background-color: #ff8c00;
+}
+
+.notes-container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 10px;
+    justify-content: center;
+}
+
+.writenotes {
+    background-color: white;
+    width: 300px;
+    margin: 10px;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.5s ease-in-out;
+    transition: transform 0.2s;
+}
+
+.writenotes:hover {
+    transform: scale(1.05);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.writenotes .notes,
+.writenotes .not {
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: #ffa500;
+    margin: 0 5px;
+}
+
+.writenotes .notes:hover,
+.writenotes .not:hover {
+    color: #ff8c00;
+}
+
+.main {
+    margin-top: 10px;
+    font-size: 1rem;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    display: none;
+}
+
+textarea {
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+}
+
+textarea:focus {
+    border-color: #ffa500;
+    outline: none;
+    box-shadow: 0 0 5px rgba(255, 165, 0, 0.5);
+}

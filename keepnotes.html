@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <title>Google Keep Clone</title>
+    <link rel="shortcut icon" href="./icon.png" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Keep Notes <i class="fa fa-sticky-note" aria-hidden="true"></i></h1>
+
+    <div class="noteskeep">
+        <button class="notes">Add notes</button>
+    </div>
+
+    <div class="notes-container"></div>
+
+    <script>
+        const butt = document.querySelector('.noteskeep button');
+        const notesContainer = document.querySelector('.notes-container');
+
+        const updateLSData = () => {
+            const textAreaData = document.querySelectorAll('textarea');
+            const notes = [];
+            textAreaData.forEach((note) => {
+                return notes.push(note.value);
+            });
+            localStorage.setItem('notes', JSON.stringify(notes));
+        }
+
+        const add = (text = '') => {
+            const note = document.createElement('div');
+            note.classList.add('writenotes');
+            const htmldata = `
+                <div class="notes"><i class="fa fa-pencil-square" aria-hidden="true"></i></div>
+                <div class="not"><i class="fa fa-trash" aria-hidden="true"></i></div>
+                <div id="main" class="main ${text ? "" : "hidden"}"></div>
+                <textarea class="${text ? "hidden" : ""}">${text}</textarea>
+            `;
+            note.insertAdjacentHTML('afterbegin', htmldata);
+            notesContainer.appendChild(note);
+
+            const editdiv1 = note.querySelector('.notes');
+            const deldiv2 = note.querySelector('.not');
+            const mainDiv = note.querySelector('.main');
+            const textarea = note.querySelector('textarea');
+
+            deldiv2.addEventListener('click', () => {
+                note.remove();
+                updateLSData();
+            });
+
+            editdiv1.addEventListener('click', () => {
+                mainDiv.classList.toggle('hidden');
+                textarea.classList.toggle('hidden');
+            });
+
+            textarea.addEventListener('change', (event) => {
+                const value = event.target.value;
+                mainDiv.innerHTML = value;
+                updateLSData();
+            });
+        }
+
+        const notes = JSON.parse(localStorage.getItem('notes'));
+        if (notes) {
+            notes.forEach((note) => add(note));
+        }
+
+        butt.addEventListener('click', () => add());
+    </script>
+</body>
+</html>
